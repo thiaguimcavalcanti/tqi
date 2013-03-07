@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:components="http://java.sun.com/jsf/composite/components">
+ 
+ 	<f:view locale="#{localeBean.locale}">
+	    <h:head>
+	    	<title>
+	            <ui:insert name="title">uPile</ui:insert>
+	        </title>
+	    	
+	    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	    	
+	    	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.min.css"/>
+	    	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap-responsive.min.css"/>
+	    	
+			<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/bootstrap.min.js"></script>
+	    	
+	    	<style>
+				
+			</style>
+			
+			
+	    	    	
+	    </h:head>
+	 
+	    <h:body>
+	    
+			<ui:insert name="content"/>
+			
+	    </h:body>
+	</f:view>
+</html>
