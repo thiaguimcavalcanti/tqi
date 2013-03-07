@@ -1,0 +1,40 @@
+<ui:composition template="/WEB-INF/pages/templates/BasicTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+
+	<ui:define name="title">#{msg['menu.home']}</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="formVote">
+		
+			<p:messages id="messages" />
+		
+			<p:selectOneRadio id="customRadio" value="#{indexController.selectedMascotID}" layout="custom">
+				<f:selectItems value="#{indexController.listMascots}" var="c" itemLabel="#{c.name}" itemValue="#{c.mascotID}" />
+			</p:selectOneRadio>
+			
+			<h:panelGrid columns="3" style="width: 300px">  
+		        <ui:repeat var="item" value="#{indexController.listMascots}" varStatus="status">
+		        	<div class="row-fluid">
+			        	<p:radioButton id="opt" for=":formVote:customRadio" itemIndex="#{status.index}" styleClass="span1"/>  
+				        <h:outputLabel for="opt" value="#{item.name}" styleClass="span5"/>  
+				        <h:outputLabel value="#{item.description}" styleClass="span6"/>
+				  	</div>
+			    </ui:repeat>
+		    </h:panelGrid>
+		    
+		    <p:captcha label="Captcha" language="pt_BR" theme="blue" required="true"/>  
+  
+		    <p:commandButton value="Votar" actionListener="#{indexController.submit}" ajax="false"/> 
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>
