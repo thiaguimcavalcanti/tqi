@@ -11,29 +11,64 @@
 	<ui:define name="title">#{msg['menu.home']}</ui:define>
 
 	<ui:define name="content">
+	
+		<style>
+			.centered {
+				padding-top: 30px;
+				max-width: 978px;
+				margin: 0px auto;
+			}
+			
+			.ui-panel .ui-panel-titlebar {
+				padding: 8px 10px 9px;
+			}
+			
+			#recaptcha_area {
+				margin: 0px auto;
+			}
+		</style>
 
-		<h:form id="formVote">
+		<h:form id="formVote" styleClass="centered">
 		
-			<p:messages id="messages" />
+			<p:messages id="messages" closable="true"/>
 		
-			<p:selectOneRadio id="customRadio" value="#{indexController.selectedMascotID}" layout="custom">
-				<f:selectItems value="#{indexController.listMascots}" var="c" itemLabel="#{c.name}" itemValue="#{c.mascotID}" />
-			</p:selectOneRadio>
-			
-			<h:panelGrid columns="3" style="width: 300px">  
-		        <ui:repeat var="item" value="#{indexController.listMascots}" varStatus="status">
-		        	<div class="row-fluid">
-			        	<p:radioButton id="opt" for=":formVote:customRadio" itemIndex="#{status.index}" styleClass="span1"/>  
-				        <h:outputLabel for="opt" value="#{item.name}" styleClass="span5"/>  
-				        <h:outputLabel value="#{item.description}" styleClass="span6"/>
-				  	</div>
-			    </ui:repeat>
-		    </h:panelGrid>
+			<div class="media" style="margin: 20px 0px 10px;">
+				<img class="pull-left media-object" src="#{facesContext.externalContext.requestContextPath}/resources/img/mascote.jpg"/>
+				<div class="media-body">
+					<h1 class="media-heading">Copa do Mundo 2014</h1>
+	
+					<!-- Nested media object -->
+					<div class="media" style="color: #9C9C9C;font-size: 18px">Enquete</div>
+				</div>
+			</div>
+		
+			<div class="row-fluid">
+				<p:panel header="1. Escolha o melhor nome para o mascote:" styleClass="span7" style="margin-top: 40px">
+					<p:selectOneRadio id="customRadio" value="#{indexController.selectedMascotID}" layout="custom" required="true" requiredMessage="Favor selecionar uma opção de nome para o mascote no passo 1.">
+						<f:selectItems value="#{indexController.listMascots}" var="c" itemLabel="#{c.name}" itemValue="#{c.mascotID}" />
+					</p:selectOneRadio>
+					
+					<h:panelGrid columns="3" style="width: 100%;margin-top: 10px">  
+				        <ui:repeat var="item" value="#{indexController.listMascots}" varStatus="status">
+				        	<div class="row-fluid" style="margin: 15px 0px">
+					        	<p:radioButton id="opt" for=":formVote:customRadio" itemIndex="#{status.index}" styleClass="span1"/>  
+						        <h:outputLabel for="opt" value="#{item.name}" styleClass="span3" style="font-size: 24px"/>  
+						        <h:outputLabel value="#{item.description}" styleClass="span8" style="color: #9C9C9C"/>
+						  	</div>
+					    </ui:repeat>
+				    </h:panelGrid>
+			    </p:panel>
+			    
+			    <div class="span5" style="margin-top: 40px">
+			    	<p:panel header="2. Digite o código de verificação abaixo:">
+			    		<div style="margin: 22px 0px">
+			    			<p:captcha label="Captcha" language="pt_BR" theme="blue" required="true" requiredMessage="Favor inserir o código de verificação." validatorMessage="Você informou um código errado no passo 2. Tente novamente."/>
+			    		</div>
+			    	</p:panel>
+			    	<p:commandButton value="Votar!" actionListener="#{indexController.submit}" ajax="false" style="margin-top: 20px;width: 100%;font-size: 24px" styleClass="ui-priority-primary"/> 
+			    </div>
+  			</div>
 		    
-		    <p:captcha label="Captcha" language="pt_BR" theme="blue" required="true"/>  
-  
-		    <p:commandButton value="Votar" actionListener="#{indexController.submit}" ajax="false"/> 
-			
 		</h:form>
 
 	</ui:define>

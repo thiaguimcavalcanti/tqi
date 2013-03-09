@@ -1,13 +1,19 @@
 package com.tqi.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Mascot")
@@ -25,6 +31,12 @@ public class MascotBean implements Serializable, Comparable<MascotBean> {
 	
 	@Column(name="Description")
 	private String description;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mascoteBean", cascade=CascadeType.ALL)
+	private List<VoteBean> listVotes = new ArrayList<VoteBean>();
+	
+	@Transient
+	private double percent;
 	
 	public MascotBean() {}
 	
@@ -56,6 +68,14 @@ public class MascotBean implements Serializable, Comparable<MascotBean> {
 		this.description = description;
 	}
 	
+	public List<VoteBean> getListVotes() {
+		return listVotes;
+	}
+	
+	public void setListVotes(List<VoteBean> listVotes) {
+		this.listVotes = listVotes;
+	}
+	
 	@Override
 	public int compareTo(MascotBean o) {
 		return (int) (this.mascotID - o.mascotID);
@@ -73,4 +93,12 @@ public class MascotBean implements Serializable, Comparable<MascotBean> {
         MascotBean guest = (MascotBean) obj;
         return mascotID == guest.mascotID;
     }
+	
+	public double getPercent() {
+		return percent;
+	}
+	
+	public void setPercent(double percent) {
+		this.percent = percent;
+	}
 }

@@ -1,5 +1,6 @@
 package com.tqi.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,8 +10,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import com.tqi.model.AppConfigurationBean;
 import com.tqi.model.MascotBean;
 import com.tqi.model.VoteBean;
 import com.tqi.service.MascotService;
@@ -49,15 +52,30 @@ public class IndexController extends CommonController implements Serializable {
 		
 		if (index > -1) {
 			try {
+				// Busca o bean selecionado
 				MascotBean mascot = listMascots.get(index);
 				
+				// Popula o bean
 				VoteBean vote = new VoteBean();
 				vote.setDateCreate(new Date(System.currentTimeMillis()));
 				vote.setMascoteBean(mascot);
 				
+				// Salva
 				voteService.save(vote);
+				
+				// Redireciona o usuario para a pagina de resultados
+				AppConfigurationBean appConfig = super.getAppConfig();
+				
+				if (appConfig != null && appConfig.getReleaseDateVotePage().compareTo(new Date()) <= 0) {
+					FacesContext.getCurrentInstance().getExternalContext().redirect("results.xhtml");
+				} else {
+					// Mostra uma mensagem de sucesso para o usuario
+				}
+				
 			} catch (AppException e) {
 				createViewMessage(e.getEnumMessage());
+			} catch (IOException e) {
+				e.printStackTrace(); // Erro ao tentar redirecionar o usuario para a pagina de resultados.
 			}
 		}
 	}
