@@ -24,19 +24,13 @@
 		<property name="hibernateProperties">
 			<props>
 				<!-- Ambiente LOCALHOST -->
-				<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/tqi?useUnicode=true&amp;zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8</prop>
+				<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/tqi_test?useUnicode=true&amp;zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8</prop>
 				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
 				<prop key="hibernate.connection.username">root</prop>
 				<prop key="hibernate.connection.password">adminadmin</prop>
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">false</prop>
 				<prop key="hibernate.generate_statistics">true</prop>
-
-				<!-- Ambiente QAS/PRD
-				<prop key="hibernate.connection.url">jdbc:mysql://dev.rds.internal.upile.com.br:3306/upile?useUnicode=true&amp;zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8</prop>
-				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
-				<prop key="hibernate.connection.username">upile</prop>
-				<prop key="hibernate.connection.password">upile123</prop> -->
 
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
