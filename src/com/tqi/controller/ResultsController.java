@@ -35,8 +35,10 @@ public class ResultsController extends CommonController implements Serializable 
 	@PostConstruct
 	public void initView() {
 		try {
+			// Busca as configuracoes do aplicativo
 			AppConfigurationBean appConfig = super.getAppConfig();
 			
+			// Redireciona o usuario para a pagina de resultados se estiver liberado
 			if (appConfig != null && appConfig.getReleaseDateVotePage().compareTo(new Date()) <= 0) {
 				listMascotsResults = voteService.getVotesResults();
 				generatePercents();
@@ -50,6 +52,9 @@ public class ResultsController extends CommonController implements Serializable 
 		}
 	}
 	
+	/**
+	 * Gera o percentual com o montante de votos para cada mascote.
+	 */
 	public void generatePercents() {
 		
 		int qtdTotalVotes = 0;

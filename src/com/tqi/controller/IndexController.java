@@ -18,6 +18,7 @@ import com.tqi.model.MascotBean;
 import com.tqi.model.VoteBean;
 import com.tqi.service.MascotService;
 import com.tqi.service.VoteService;
+import com.tqi.util.EnumMessages;
 import com.tqi.util.exceptions.AppException;
 
 @ManagedBean
@@ -39,12 +40,17 @@ public class IndexController extends CommonController implements Serializable {
 	@PostConstruct
 	public void initView() {
 		try {
-			listMascots = mascotService.findAll();
+			listMascots = mascotService.findAll();	// Carrega os mascotes
 		} catch (AppException e) {
 			createViewMessage(e.getEnumMessage());
 		}
 	}
 	
+	/**
+	 * Envia os dados da votacao 
+	 * 
+	 * @param event
+	 */
 	public void submit(ActionEvent event) { 
 
 		// Busca a posicao do mascote selecionado na lista
@@ -69,7 +75,7 @@ public class IndexController extends CommonController implements Serializable {
 				if (appConfig != null && appConfig.getReleaseDateVotePage().compareTo(new Date()) <= 0) {
 					FacesContext.getCurrentInstance().getExternalContext().redirect("results.xhtml");
 				} else {
-					// Mostra uma mensagem de sucesso para o usuario
+					createViewMessage(EnumMessages.SUCESSO_VOTE);
 				}
 				
 			} catch (AppException e) {

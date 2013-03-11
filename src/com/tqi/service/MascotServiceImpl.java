@@ -1,10 +1,7 @@
 package com.tqi.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.tqi.dao.CommonDAO;
 import com.tqi.dao.MascotDAO;
@@ -28,9 +25,4 @@ public class MascotServiceImpl extends CommonServiceImpl<MascotBean> implements 
 		return (CommonDAO<MascotBean>) mascotDAO;
 	}
 	
-	@Override
-	@Transactional(readOnly=true)
-	public List getVotesResults() throws AppException {
-		return mascotDAO.getVotesResults();
-	}
 }

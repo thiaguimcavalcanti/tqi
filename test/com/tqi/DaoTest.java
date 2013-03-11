@@ -57,6 +57,9 @@ public class DaoTest {
         
     }
 	
+	/**
+	 * Metodo para testar a insercao dos mascotes
+	 */
 	@Test
 	@Transactional(rollbackFor={AppException.class})
 	public void testPopulateMascots() {
@@ -84,6 +87,12 @@ public class DaoTest {
 		}
 	}
 	
+	/**
+	 * Metodo responsavel por testar 500 requisicoes simultaneas e verifica se o sistema 
+	 * comporta estas solicitacoes.
+	 * 
+	 * Em media: 500 requisicoes sao executadas em 1200 milisegundos | 1 segundo
+	 */
 	@Test
 	@Transactional(rollbackFor={AppException.class})
     public void testVotation() {
@@ -125,7 +134,7 @@ public class DaoTest {
 		}
 
 		try {
-			Thread.sleep(60000);
+			Thread.sleep(60000); // Faz com que o teste aguarde a conclusao das threads
 			executor.shutdown();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

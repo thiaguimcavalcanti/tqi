@@ -8,7 +8,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:components="http://java.sun.com/jsf/composite/components">
 
-	<ui:define name="title">#{msg['menu.home']}</ui:define>
+	<ui:define name="title">#{msg['index.title']}</ui:define>
 
 	<ui:define name="content">
 	
@@ -35,16 +35,16 @@
 			<div class="media" style="margin: 20px 0px 10px;">
 				<img class="pull-left media-object" src="#{facesContext.externalContext.requestContextPath}/resources/img/mascote.jpg"/>
 				<div class="media-body">
-					<h1 class="media-heading">Copa do Mundo 2014</h1>
+					<h1 class="media-heading">#{msg['custom.worldCup']}</h1>
 	
 					<!-- Nested media object -->
-					<div class="media" style="color: #9C9C9C;font-size: 18px">Enquete</div>
+					<div class="media" style="color: #9C9C9C;font-size: 18px">#{msg['custom.search']}</div>
 				</div>
 			</div>
 		
 			<div class="row-fluid">
-				<p:panel header="1. Escolha o melhor nome para o mascote:" styleClass="span7" style="margin-top: 40px">
-					<p:selectOneRadio id="customRadio" value="#{indexController.selectedMascotID}" layout="custom" required="true" requiredMessage="Favor selecionar uma opção de nome para o mascote no passo 1.">
+				<p:panel header="#{msg['index.firstStep']}:" styleClass="span7" style="margin-top: 40px">
+					<p:selectOneRadio id="customRadio" value="#{indexController.selectedMascotID}" layout="custom" required="true" requiredMessage="#{msg['index.firstStepError']}">
 						<f:selectItems value="#{indexController.listMascots}" var="c" itemLabel="#{c.name}" itemValue="#{c.mascotID}" />
 					</p:selectOneRadio>
 					
@@ -60,12 +60,12 @@
 			    </p:panel>
 			    
 			    <div class="span5" style="margin-top: 40px">
-			    	<p:panel header="2. Digite o código de verificação abaixo:">
+			    	<p:panel header="#{msg['index.secondStep']}:">
 			    		<div style="margin: 22px 0px">
-			    			<p:captcha label="Captcha" language="pt_BR" theme="blue" required="true" requiredMessage="Favor inserir o código de verificação." validatorMessage="Você informou um código errado no passo 2. Tente novamente."/>
+			    			<p:captcha label="Captcha" language="pt_BR" theme="blue" required="true" requiredMessage="#{msg['index.secondStepError']}." validatorMessage="#{msg['index.secondStepErrorValidation']}"/>
 			    		</div>
 			    	</p:panel>
-			    	<p:commandButton value="Votar!" actionListener="#{indexController.submit}" ajax="false" style="margin-top: 20px;width: 100%;font-size: 24px" styleClass="ui-priority-primary"/> 
+			    	<p:commandButton value="#{msg['index.vote']}!" actionListener="#{indexController.submit}" ajax="false" style="margin-top: 20px;width: 100%;font-size: 24px" styleClass="ui-priority-primary"/> 
 			    </div>
   			</div>
 		    

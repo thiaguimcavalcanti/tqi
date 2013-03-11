@@ -19,6 +19,11 @@ public class VoteDAOImpl extends CommonDAOImpl<VoteBean> implements VoteDAO {
 		super(VoteBean.class);
 	}
 	
+	/**
+	 * Metodo que retorna os votos agrupados por mascote.
+	 * 
+	 * @return List<ResultAnalyticBean>
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ResultAnalyticBean> getVotesResults() throws AppException {
@@ -32,8 +37,8 @@ public class VoteDAOImpl extends CommonDAOImpl<VoteBean> implements VoteDAO {
                     .setResultTransformer(new AliasToBeanResultTransformer(ResultAnalyticBean.class))
                     .list();
 		} catch (Exception e) {
-			logger.error(createLogMessage(EnumMessages.ERRO_FIND_BY_NAME), e);
-			throw new AppException(EnumMessages.ERRO_FIND_BY_NAME);
+			logger.error(createLogMessage(EnumMessages.ERRO_GET_VOTES_RESULT), e);
+			throw new AppException(EnumMessages.ERRO_GET_VOTES_RESULT);
 		}
 	}
 	

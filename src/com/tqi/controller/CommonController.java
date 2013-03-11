@@ -25,7 +25,7 @@ public abstract class CommonController {
 	 * @param enumMessage
 	 */
 	public static void createViewMessage(EnumMessages enumMessage) {
-		FacesMessage message = new FacesMessage(enumMessage.getSeverity(), null, enumMessage.getKey());  
+		FacesMessage message = new FacesMessage(enumMessage.getSeverity(), AttributesSession.resourceBundleMsgs.getString(enumMessage.getKey()), null);  
         FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 	

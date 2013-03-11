@@ -8,7 +8,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:components="http://java.sun.com/jsf/composite/components">
 
-	<ui:define name="title">#{msg['menu.home']}</ui:define>
+	<ui:define name="title">#{msg['results.title']}</ui:define>
 
 	<ui:define name="content">
 	
@@ -31,14 +31,14 @@
 			<div class="media" style="margin: 20px 0px 10px;">
 				<img class="pull-left media-object" src="#{facesContext.externalContext.requestContextPath}/resources/img/mascote.jpg"/>
 				<div class="media-body">
-					<h1 class="media-heading">Copa do Mundo 2014</h1>
+					<h1 class="media-heading">#{msg['custom.worldCup']}</h1>
 	
 					<!-- Nested media object -->
-					<div class="media" style="color: #9C9C9C;font-size: 18px">Enquete</div>
+					<div class="media" style="color: #9C9C9C;font-size: 18px">#{msg['custom.search']}</div>
 				</div>
 			</div>
 		
-			<p:panel header="Confira o resultado parcial da votação:" style="margin-top: 50px">
+			<p:panel header="#{msg['results.step']}:" style="margin-top: 50px">
 				<div class="row-fluid" style="margin: 80px 0px">
 					<ui:repeat var="item" value="#{resultsController.listMascotsResults}" varStatus="status">
 						<div class="span4" style="text-align: center">
